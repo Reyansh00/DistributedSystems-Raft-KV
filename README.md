@@ -29,7 +29,7 @@ Implements the algorithm described in the
 [extended Raft paper](http://nil.csail.mit.edu/6.824/2020/papers/raft-extended.pdf) 
 , closely following Figure 2.
 
-**Raft (src/raft/raft.go)**
+**Raft (raft/raft.go)**
 
 The consensus layer. Every write goes through Raft before it touches the 
 KV store. Raft replicates the write to a majority of nodes, and only once 
@@ -42,7 +42,7 @@ Key pieces:
 - Persistence: currentTerm, votedFor and log are written to disk before 
   any RPC response, so a crashed node restores correct state on restart
 
-**KV Server (src/kvraft/server.go)**
+**KV Server (kvraft/server.go)**
 
 Sits on top of Raft. When a request comes in, the server submits it to 
 Raft and waits on a channel for it to be committed. Once Raft commits the 
@@ -79,8 +79,8 @@ This uses the MIT 6.824 lab infrastructure (labrpc, labgob). Clone the
 full 6.824 repo, drop these files in, and run:
 
     export GOPATH=~/6.824
-    cd src/raft && go test
-    cd src/kvraft && go test -run 3A
+    cd raft && go test
+    cd kvraft && go test -run 3A
 
 ---
 
